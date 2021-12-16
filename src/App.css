@@ -17,7 +17,7 @@
 
 }
 
-.home-screen> .card{
+.card{
   /* width: 290px; */
   transition: ease 0.3s;
   margin: 15px 10px;
@@ -26,17 +26,17 @@
     border: none;
 }
 
-.home-screen> .card:hover{
+.card:hover{
   cursor: pointer;
   overflow: hidden;
 }
 
-.home-screen> .card> img{
+.card> img{
   position: relative;
   height: 100%;
 }
 
-.home-screen> .card > .card-img-overlay{
+.card > .card-img-overlay{
   text-align: left;
   padding: 10px;
   display: flex;
@@ -46,6 +46,77 @@
 181deg, #00000082, transparent)
 }
 
-.home-screen> .card > .card-img-overlay> div,p{
+.card > .card-img-overlay> div,p{
   margin: 0px;
+}
+
+.card> .custom-overlay{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transition: ease 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #0000006e;
+    opacity: 0;
+}
+
+.card> .custom-overlay:hover {
+  opacity: 1;
+  transition: ease 0.5s;
+}
+
+
+.screen-page{
+  padding: 80px 10px;
+  margin: 10px 0px;
+    width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.screen-page> .adpost-area{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.screen-page> .login{
+  width: 30%;
+}
+
+.screen-page> .admin{
+  width: 90%;
+}
+
+
+.admin> span{
+  width: 100%;
+    height: 2px;
+    background: black;
+    margin-bottom: 50px;
+    
+}
+
+.admin> .my-post{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+    height: auto;
+
+}
+
+.modal>.modal-dialog{
+max-width: 50%;
 }

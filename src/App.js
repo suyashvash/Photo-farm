@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import HomeScreen from './screens/homescreen';
+import AddPostScreen from './screens/addPost';
+import LoginScreen from './screens/loginscreen';
+import AdminScreen from './screens/adminscreen';
 
 function App() {
   return (
@@ -21,6 +24,7 @@ function App() {
       </Navbar>
 
       <HomeScreen />
+      {/* <AdminScreen /> */}
     </div>
   );
 }

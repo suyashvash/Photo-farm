@@ -17,11 +17,10 @@ const statusObject = {
 userRouter.route('/register').post((req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    const userpic = req.body.userPic;
     const timeStamp = new Date().getTime();
     const token = `${timeStamp}${req.body.username}`;
 
-    const newUser = new User({ username, token, password, userpic })
+    const newUser = new User({ username, token, password })
 
     User.find()
         .then(userArray => {

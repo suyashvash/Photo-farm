@@ -1,8 +1,18 @@
 import React from "react";
 import PostCard from "../components/postBox";
+import ModalAlert from "../components/modal";
 
 export default function HomeScreen() {
 
+    const [show, setShow] = React.useState(false)
+    const [modalUrl, setModalUrl] = React.useState('');
+    const [modalBody, setModalBody] = React.useState('')
+
+    const showFullscreenImg = (caption, url, username) => {
+        setModalUrl(url)
+        setModalBody(caption)
+        setShow(true)
+    }
 
     const postData = [
         {
@@ -63,6 +73,12 @@ export default function HomeScreen() {
 
     return (
         <div className="home-screen">
+            <ModalAlert
+                show={show}
+                handleClose={() => setShow(false)}
+                url={modalUrl}
+                body={modalBody}
+            />
             {postData &&
                 postData.map((post, index) => (
                     <PostCard
@@ -71,6 +87,7 @@ export default function HomeScreen() {
                         author={post.username}
                         time={post.createdAt}
                         postUrl={post.picurl}
+                        onClick={() => showFullscreenImg(post.caption, post.picurl, post.username)}
                     />
                 ))
             }
