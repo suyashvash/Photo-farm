@@ -1,6 +1,20 @@
+import React from "react";
 import PostCard from "../components/postBox"
+import ModalAlert from "../components/modal";
 
-export default function AdminScreen() {
+
+
+export default function ProfileScreen() {
+
+    const [show, setShow] = React.useState(false)
+    const [modalUrl, setModalUrl] = React.useState('');
+    const [modalBody, setModalBody] = React.useState('')
+
+    const showFullscreenImg = (caption, url, username) => {
+        setModalUrl(url)
+        setModalBody(caption)
+        setShow(true)
+    }
 
     const postData = [
         {
@@ -62,9 +76,21 @@ export default function AdminScreen() {
 
     return (
         <div className="screen-page admin-page">
+
+            <ModalAlert
+                show={show}
+                handleClose={() => setShow(false)}
+                url={modalUrl}
+                body={modalBody}
+            />
             <div className="adpost-area admin">
-                <h3>Hi, suyash</h3>
+                <div className="profile-head">
+                    <h3>Hi, suyash</h3>
+                    <h4>Your posts</h4>
+                </div>
+
                 <span></span>
+
                 <div className="my-post">
                     {postData &&
                         postData.map((post, index) => (
@@ -74,6 +100,8 @@ export default function AdminScreen() {
                                 author={post.username}
                                 time={post.createdAt}
                                 postUrl={post.picurl}
+                                profileView={true}
+                                onClick={() => showFullscreenImg(post.caption, post.picurl, post.username)}
                             />
                         ))
                     }

@@ -87,6 +87,7 @@ export default function HomeScreen() {
                         author={post.username}
                         time={post.createdAt}
                         postUrl={post.picurl}
+                        profileView={false}
                         onClick={() => showFullscreenImg(post.caption, post.picurl, post.username)}
                     />
                 ))
