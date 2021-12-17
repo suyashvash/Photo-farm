@@ -1,12 +1,16 @@
 import React from "react";
 import PostCard from "../components/postBox";
 import ModalAlert from "../components/modal";
+import axios from "axios";
 
 export default function HomeScreen() {
+
+    React.useEffect(() => { getPosts() }, [])
 
     const [show, setShow] = React.useState(false)
     const [modalUrl, setModalUrl] = React.useState('');
     const [modalBody, setModalBody] = React.useState('')
+    const [postData, setPostData] = React.useState([]);
 
     const showFullscreenImg = (caption, url, username) => {
         setModalUrl(url)
@@ -14,62 +18,12 @@ export default function HomeScreen() {
         setShow(true)
     }
 
-    const postData = [
-        {
-            caption: "Swan garden",
-            username: "suyash",
-            createdAt: "12/01/2003",
-            picurl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        },
-        {
-            caption: "Polka River",
-            username: "andy",
-            createdAt: "05/04/2013",
-            picurl: "https://media.istockphoto.com/photos/sunrise-on-a-lake-picture-id1043560968?k=20&m=1043560968&s=612x612&w=0&h=FYgd_p1ADZ3d0DySs-ciHLDxp9FuvJv0O_hIco2IJnM="
-        },
-        {
-            caption: "Mathew station",
-            username: "mikasa",
-            createdAt: "02/12/2021",
-            picurl: "https://akm-img-a-in.tosshub.com/businesstoday/images/story/201901/railway_station_660_010619112111.jpg"
-        },
-        {
-            caption: "Swan garden",
-            username: "suyash",
-            createdAt: "12/01/2003",
-            picurl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        },
-        {
-            caption: "Polka River",
-            username: "andy",
-            createdAt: "05/04/2013",
-            picurl: "https://media.istockphoto.com/photos/sunrise-on-a-lake-picture-id1043560968?k=20&m=1043560968&s=612x612&w=0&h=FYgd_p1ADZ3d0DySs-ciHLDxp9FuvJv0O_hIco2IJnM="
-        },
-        {
-            caption: "Mathew station",
-            username: "mikasa",
-            createdAt: "02/12/2021",
-            picurl: "https://akm-img-a-in.tosshub.com/businesstoday/images/story/201901/railway_station_660_010619112111.jpg"
-        },
-        {
-            caption: "Swan garden",
-            username: "suyash",
-            createdAt: "12/01/2003",
-            picurl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-        },
-        {
-            caption: "Polka River",
-            username: "andy",
-            createdAt: "05/04/2013",
-            picurl: "https://media.istockphoto.com/photos/sunrise-on-a-lake-picture-id1043560968?k=20&m=1043560968&s=612x612&w=0&h=FYgd_p1ADZ3d0DySs-ciHLDxp9FuvJv0O_hIco2IJnM="
-        },
-        {
-            caption: "Mathew station",
-            username: "mikasa",
-            createdAt: "02/12/2021",
-            picurl: "https://akm-img-a-in.tosshub.com/businesstoday/images/story/201901/railway_station_660_010619112111.jpg"
-        }
-    ]
+    const getPosts = () => {
+        axios.get('http://localhost:5000/api/posts/showall')
+            .then(response => { console.log(response.data); setPostData(response.data) })
+            .catch(err => console.log(err))
+    }
+
 
     return (
         <div className="home-screen">
@@ -86,9 +40,9 @@ export default function HomeScreen() {
                         caption={post.caption}
                         author={post.username}
                         time={post.createdAt}
-                        postUrl={post.picurl}
+                        postUrl={post.postUrl}
                         profileView={false}
-                        onClick={() => showFullscreenImg(post.caption, post.picurl, post.username)}
+                        onClick={() => showFullscreenImg(post.caption, post.postUrl, post.username)}
                     />
                 ))
             }

@@ -116,6 +116,10 @@
   width: 30%;
 }
 
+.lgn-btn-holder>button{
+  margin-right: 10px;
+}
+
 .screen-page> .admin{
   width: 90%;
 }
@@ -131,9 +135,17 @@
 .admin> span{
   width: 100%;
     height: 2px;
-    background: black;
-    margin-bottom: 50px;
+    background: rgb(255, 255, 255);
+    margin-bottom: 30px;
     
+}
+
+.your-post{
+  margin-top: 10px;
+    background: #e9ecef;
+    color: black;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .admin> .my-post{
@@ -150,3 +162,4 @@
 .modal>.modal-dialog{
 max-width: 50%;
 }
+

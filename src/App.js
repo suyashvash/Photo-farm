@@ -16,10 +16,11 @@ import {
   Link
 } from "react-router-dom";
 
+import { LoggedIn } from './app/useStore'
 
 function App() {
 
-
+  const loggedIn = LoggedIn()
 
   return (
     <div className="App">
@@ -31,8 +32,8 @@ function App() {
             <Navbar.Brand ><Link to="/">Photo Farm</Link></Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
-              <Link to="/createpost"><Button size="sm" variant="outline-light" >Add Post</Button></Link>
-              <Link to="/profile"><Button size="sm" variant="outline-light">Login/Sign up</Button></Link>
+              <Link to={loggedIn ? "/createpost" : "/login"}><Button size="sm" variant="outline-light" >Add Post</Button></Link>
+              <Link to={loggedIn ? "/profile" : "/login"}><Button size="sm" variant="outline-light">{loggedIn ? "Profile" : "Login/Sign up"}</Button></Link>
             </Navbar.Collapse>
           </Container>
         </Navbar>
