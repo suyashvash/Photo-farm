@@ -44,7 +44,7 @@ export default function ProfileScreen() {
     }
 
     const getPosts = () => {
-        axios.get(`http://localhost:5000/api/posts/mypost/${token}`)
+        axios.get(`https://photofarm.herokuapp.com/api/posts/mypost/${token}`)
             .then(response => { setPostData(response.data.data) })
             .catch(err => console.log(err))
     }
@@ -54,7 +54,7 @@ export default function ProfileScreen() {
             url: selectedUrl,
             caption: selectedCaption,
         }
-        await axios.post(`http://localhost:5000/api/posts/updatepost/${selectedId}`, data)
+        await axios.post(`https://photofarm.herokuapp.com/api/posts/updatepost/${selectedId}`, data)
             .then(response => {
                 if (response.data.status) { alert("Post Updated!"); window.location.reload(); }
                 else alert("Failed")
@@ -66,7 +66,7 @@ export default function ProfileScreen() {
     const deletePost = async (id) => {
         const ask = window.confirm("Are you sure you want delete this post? This can't be undone.")
         if (ask) {
-            await axios.delete(`http://localhost:5000/api/posts/deletepost/${id}`)
+            await axios.delete(`https://photofarm.herokuapp.com/api/posts/deletepost/${id}`)
                 .then(response => {
                     if (response.data.status) { alert("Post Deleted!"); window.location.reload(); }
                     else alert("Failed")

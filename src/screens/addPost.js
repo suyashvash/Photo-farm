@@ -18,7 +18,7 @@ export default function AddPostScreen() {
                 caption: `${caption}`,
                 postUrl: `${url}`
             }
-            axios.post('http://localhost:5000/api/posts/addPost', data)
+            axios.post('https://photofarm.herokuapp.com/api/posts/addPost', data)
                 .then(res => {
                     console.log(res)
                     if (res.data.status) {

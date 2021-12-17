@@ -19,7 +19,7 @@ export default function HomeScreen() {
     }
 
     const getPosts = () => {
-        axios.get('http://localhost:5000/api/posts/showall')
+        axios.get('https://photofarm.herokuapp.com/api/posts/showall')
             .then(response => { console.log(response.data); setPostData(response.data) })
             .catch(err => console.log(err))
     }
