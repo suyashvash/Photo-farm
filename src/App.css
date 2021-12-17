@@ -163,3 +163,8 @@
 max-width: 50%;
 }
 
+@media only screen and (max-width: 600px) {
+    .modal>.modal-dialog{max-width: 100%;}
+    .screen-page> .login{width: 80%;}
+    .screen-page> .adpost-area{width: 90%;}
+}

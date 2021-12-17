@@ -2,6 +2,11 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 
 export default function PostCard(props) {
+
+    const dateFomat = (date) => {
+        return date.split('T')[0].split('-').reverse().join('-')
+    }
+
     return (
         <div className='card-wrapper'>
             <Card className="bg-dark text-white" onClick={props.onClick}>
@@ -9,7 +14,7 @@ export default function PostCard(props) {
                 <Card.ImgOverlay>
                     <Card.Title>{props.caption}</Card.Title>
                     <Card.Text>{props.author}</Card.Text>
-                    <Card.Text>Posted at - {props.time}</Card.Text>
+                    <Card.Text>Posted at - {dateFomat(props.time)}</Card.Text>
                 </Card.ImgOverlay>
                 <div className='custom-overlay'>
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" className="bi bi-fullscreen" viewBox="0 0 16 16">
