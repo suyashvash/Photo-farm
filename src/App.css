@@ -12,6 +12,7 @@
 }
 
 .home-screen{
+  min-height: 100vh;
   padding: 80px 10px;
   margin: 10px 0px;
     width: 100%;
@@ -161,6 +162,15 @@
 
 .modal>.modal-dialog{
 max-width: 50%;
+}
+
+.loading-screen{
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (max-width: 600px) {

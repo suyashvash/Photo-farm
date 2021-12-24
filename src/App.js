@@ -13,7 +13,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
 
 import { LoggedIn } from './app/useStore'
@@ -43,6 +43,7 @@ function App() {
           <Route path="/createpost" exact element={<AddPostScreen />} />
           <Route path="/login" exact element={<LoginScreen />} />
           <Route path="/profile" exact element={<ProfileScreen />} />
+          <Route path="*" exact element={<HomeScreen />} />
         </Routes>
       </Router>
 

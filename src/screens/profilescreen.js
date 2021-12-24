@@ -19,7 +19,7 @@ export default function ProfileScreen() {
     const [modalUrl, setModalUrl] = React.useState('');
     const [modalBody, setModalBody] = React.useState('')
     const [postData, setPostData] = React.useState([]);
-
+    const [isLoading, setIsLoading] = React.useState(true);
 
     const [selectedUrl, setSelectedUrl] = React.useState('')
     const [selectedCaption, setSelectedCaption] = React.useState('')
@@ -45,8 +45,8 @@ export default function ProfileScreen() {
 
     const getPosts = () => {
         axios.get(`https://photofarm.herokuapp.com/api/posts/mypost/${token}`)
-            .then(response => { setPostData(response.data.data) })
-            .catch(err => console.log(err))
+            .then(response => { setPostData(response.data.data); setIsLoading(false) })
+            .catch(err => { console.log(err); setIsLoading(false) })
     }
 
     const updatePost = async () => {
@@ -170,32 +170,39 @@ export default function ProfileScreen() {
 
 
 
-            <div className="adpost-area admin">
-                <div className="profile-head your-post">
-                    <h4>{postData.length !== 0 ? "Your posts" : "No posts"}</h4>
-                    <Button variant="dark" onClick={logout}>Logout</Button>
-                </div>
+            {!isLoading ?
+                <div className="adpost-area admin">
+                    <div className="profile-head your-post">
+                        <h4>{postData.length !== 0 ? "Your posts" : "No posts"}</h4>
+                        <Button variant="dark" onClick={logout}>Logout</Button>
+                    </div>
 
-                <span></span>
+                    <span></span>
 
-                <div className="my-post">
-                    {postData &&
-                        postData.map((post, index) => (
-                            <PostCard
-                                key={index}
-                                caption={post.caption}
-                                author={post.username}
-                                time={post.createdAt}
-                                postUrl={post.postUrl}
-                                profileView={true}
-                                deleteFunction={() => deletePost(post._id)}
-                                updateFunction={() => showUpdateModel(post.caption, post.postUrl, post._id)}
-                                onClick={() => showFullscreenImg(post.caption, post.postUrl, post.username)}
-                            />
-                        ))
-                    }
+                    <div className="my-post">
+                        {postData &&
+                            postData.map((post, index) => (
+                                <PostCard
+                                    key={index}
+                                    caption={post.caption}
+                                    author={post.username}
+                                    time={post.createdAt}
+                                    postUrl={post.postUrl}
+                                    profileView={true}
+                                    deleteFunction={() => deletePost(post._id)}
+                                    updateFunction={() => showUpdateModel(post.caption, post.postUrl, post._id)}
+                                    onClick={() => showFullscreenImg(post.caption, post.postUrl, post.username)}
+                                />
+                            ))
+                        }
+                    </div>
                 </div>
-            </div>
+                :
+                <div className="loading-screen">
+                    <h3>Loading content......</h3>
+                    <span>Please wait </span>
+                </div>
+            }
         </div >
     )
 }
