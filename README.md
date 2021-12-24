@@ -1,4 +1,4 @@
-# Photo Farm Backend
+# Photo Farm Frontend
 
 Photo farm is a online platform for uploading photos with captions to showcase your creativity and work.
 
