@@ -1,18 +1,16 @@
-# Photo Farm
+# Photo Farm Backend
 
-Photo farm is a Full Stack social platform Webapp made in MERN Stack
-
-## About
-
-Photo farm is a platform for photographers and photo geeks. People can uplaod there
-photos with proper caption to showcase there work.
+Photo farm is a online platform for uploading photos with captions to showcase your creativity and work.
 
 
-## Tech used
+[Visit Site](https://photofarm.netlify.com/)
 
-Mongo DB
-Express JS
-React JS
-Node Js
-Bootstrap
+## Tech used 
+
+MERN Stack 
+
+1. Mongo DB as Backend
+2. Express js as Backend framework
+3. React JS as Frontend 
+4. Node js
 
