@@ -10,9 +10,9 @@ photos with proper caption to showcase there work.
 
 ## Tech used
 
-> Mongo DB
-> Express JS
-> React JS
-> Node Js
-> Bootstrap
+Mongo DB
+Express JS
+React JS
+Node Js
+Bootstrap
 
