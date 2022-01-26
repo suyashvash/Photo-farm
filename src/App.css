@@ -50,6 +50,13 @@
     border: none;
 }
 
+.cardTitle{
+  width: 90%;
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .card:hover{
   cursor: pointer;
   overflow: hidden;
@@ -171,6 +178,17 @@ max-width: 50%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.bi-camera{
+  transform: translateY(-10%);
+  animation: floater 1s infinite;
+  transition: ease 0.5s;
+}
+
+@keyframes floater {
+  0%{transform: translateY(-10%);transition: ease 0.5s;}
+  50%{transform: translateY(10%);transition: ease 0.5s;}
 }
 
 @media only screen and (max-width: 600px) {

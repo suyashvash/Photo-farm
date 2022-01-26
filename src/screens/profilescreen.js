@@ -15,7 +15,8 @@ export default function ProfileScreen() {
 
     React.useEffect(() => { getPosts() }, [])
 
-    const [show, setShow] = React.useState(false)
+    const [show, setShow] = React.useState(false);
+    const [alertShow, setAlertShow] = React.useState(false)
     const [modalUrl, setModalUrl] = React.useState('');
     const [modalBody, setModalBody] = React.useState('')
     const [postData, setPostData] = React.useState([]);
@@ -30,7 +31,7 @@ export default function ProfileScreen() {
     const dispatch = useDispatch()
     const token = Token()
 
-    const showFullscreenImg = (caption, url, username) => {
+    const showFullscreenImg = (caption, url) => {
         setModalUrl(url)
         setModalBody(caption)
         setShow(true)
@@ -50,92 +51,58 @@ export default function ProfileScreen() {
     }
 
     const updatePost = async () => {
+        setIsLoading(true)
+        setIsEding(false)
         const data = {
             url: selectedUrl,
             caption: selectedCaption,
         }
         await axios.post(`https://photofarm.herokuapp.com/api/posts/updatepost/${selectedId}`, data)
             .then(response => {
-                if (response.data.status) { alert("Post Updated!"); window.location.reload(); }
-                else alert("Failed")
+                if (response.data.status) {
+                    setIsLoading(false);
+                    setModalBody(<span>Post updated succesfully !</span>)
+                    setAlertShow(true)
+                    getPosts();
+                }
+                else {
+                    setIsLoading(false);
+                    setModalBody(<span>Post Update failed !</span>)
+                    setAlertShow(true)
+                    getPosts();
+                }
             })
             .catch(err => console.log(err))
-        isEditing(false)
+
     }
 
     const deletePost = async (id) => {
+
         const ask = window.confirm("Are you sure you want delete this post? This can't be undone.")
         if (ask) {
+            setIsLoading(true)
+            setIsEding(false)
             await axios.delete(`https://photofarm.herokuapp.com/api/posts/deletepost/${id}`)
                 .then(response => {
-                    if (response.data.status) { alert("Post Deleted!"); window.location.reload(); }
-                    else alert("Failed")
+                    if (response.data.status) {
+                        setIsLoading(false);
+                        setModalBody(<span>Post Deleted succesfully !</span>)
+                        setAlertShow(true)
+                    }
+                    else {
+                        setIsLoading(false);
+                        setModalBody(<span>Post Deleted succesfully !</span>)
+                        setAlertShow(true)
+                    }
                 })
                 .catch(err => console.log(err))
         }
     }
 
 
-    // const postData = [
-    //     {
-    //         caption: "Swan garden",
-    //         username: "suyash",
-    //         createdAt: "12/01/2003",
-    //         picurl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-    //     },
-    //     {
-    //         caption: "Polka River",
-    //         username: "andy",
-    //         createdAt: "05/04/2013",
-    //         picurl: "https://media.istockphoto.com/photos/sunrise-on-a-lake-picture-id1043560968?k=20&m=1043560968&s=612x612&w=0&h=FYgd_p1ADZ3d0DySs-ciHLDxp9FuvJv0O_hIco2IJnM="
-    //     },
-    //     {
-    //         caption: "Mathew station",
-    //         username: "mikasa",
-    //         createdAt: "02/12/2021",
-    //         picurl: "https://akm-img-a-in.tosshub.com/businesstoday/images/story/201901/railway_station_660_010619112111.jpg"
-    //     },
-    //     {
-    //         caption: "Swan garden",
-    //         username: "suyash",
-    //         createdAt: "12/01/2003",
-    //         picurl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-    //     },
-    //     {
-    //         caption: "Polka River",
-    //         username: "andy",
-    //         createdAt: "05/04/2013",
-    //         picurl: "https://media.istockphoto.com/photos/sunrise-on-a-lake-picture-id1043560968?k=20&m=1043560968&s=612x612&w=0&h=FYgd_p1ADZ3d0DySs-ciHLDxp9FuvJv0O_hIco2IJnM="
-    //     },
-    //     {
-    //         caption: "Mathew station",
-    //         username: "mikasa",
-    //         createdAt: "02/12/2021",
-    //         picurl: "https://akm-img-a-in.tosshub.com/businesstoday/images/story/201901/railway_station_660_010619112111.jpg"
-    //     },
-    //     {
-    //         caption: "Swan garden",
-    //         username: "suyash",
-    //         createdAt: "12/01/2003",
-    //         picurl: "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg"
-    //     },
-    //     {
-    //         caption: "Polka River",
-    //         username: "andy",
-    //         createdAt: "05/04/2013",
-    //         picurl: "https://media.istockphoto.com/photos/sunrise-on-a-lake-picture-id1043560968?k=20&m=1043560968&s=612x612&w=0&h=FYgd_p1ADZ3d0DySs-ciHLDxp9FuvJv0O_hIco2IJnM="
-    //     },
-    //     {
-    //         caption: "Mathew station",
-    //         username: "mikasa",
-    //         createdAt: "02/12/2021",
-    //         picurl: "https://akm-img-a-in.tosshub.com/businesstoday/images/story/201901/railway_station_660_010619112111.jpg"
-    //     }
-    // ]
-
     const logout = () => {
-        dispatch(setUserLogOutState())
         navigate(`/`)
+        dispatch(setUserLogOutState())
     }
 
     return (
@@ -144,9 +111,15 @@ export default function ProfileScreen() {
             <ModalAlert
                 show={show}
                 handleClose={() => setShow(false)}
-                url={modalUrl}
                 body={modalBody}
-                mode={"frame"}
+                url={modalUrl}
+                mode={'frame'}
+            />
+
+            <ModalAlert
+                show={alertShow}
+                handleClose={() => setAlertShow(false)}
+                body={modalBody}
 
             />
 
@@ -199,7 +172,12 @@ export default function ProfileScreen() {
                 </div>
                 :
                 <div className="loading-screen">
-                    <h3>Loading content......</h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="black" className="bi bi-camera" viewBox="0 0 16 16">
+                        <path d="M15 12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h1.172a3 3 0 0 0 2.12-.879l.83-.828A1 1 0 0 1 6.827 3h2.344a1 1 0 0 1 .707.293l.828.828A3 3 0 0 0 12.828 5H14a1 1 0 0 1 1 1v6zM2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2z" />
+                        <path d="M8 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm0 1a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM3 6.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+                    </svg>
+                    <br />
+                    <h3>Loading......</h3>
                     <span>Please wait </span>
                 </div>
             }

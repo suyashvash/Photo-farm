@@ -12,7 +12,7 @@ export default function PostCard(props) {
             <Card className="bg-dark text-white" onClick={props.onClick}>
                 <Card.Img src={props.postUrl} alt="Card image" />
                 <Card.ImgOverlay>
-                    <Card.Title>{props.caption}</Card.Title>
+                    <Card.Title className='cardTitle'>{props.caption}</Card.Title>
                     <Card.Text>{props.author}</Card.Text>
                     <Card.Text>Posted at - {dateFomat(props.time)}</Card.Text>
                 </Card.ImgOverlay>
