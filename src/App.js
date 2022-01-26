@@ -40,9 +40,9 @@ function App() {
 
         <Routes>
           <Route path="/" exact element={<HomeScreen />} />
-          <Route path="/createpost" exact element={<AddPostScreen />} />
+          <Route path="/createpost" exact element={loggedIn ? <AddPostScreen /> : <LoginScreen />} />
           <Route path="/login" exact element={<LoginScreen />} />
-          <Route path="/profile" exact element={<ProfileScreen />} />
+          <Route path="/profile" exact element={loggedIn ? <ProfileScreen /> : <LoginScreen />} />
           <Route path="*" exact element={<HomeScreen />} />
         </Routes>
       </Router>
