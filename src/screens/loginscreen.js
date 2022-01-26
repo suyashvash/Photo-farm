@@ -3,7 +3,7 @@ import axios from 'axios'
 import InputGroup from 'react-bootstrap/InputGroup'
 import FormControl from 'react-bootstrap/FormControl'
 import Button from 'react-bootstrap/Button'
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setActiveUser } from "../features/userSlice";
 import { useNavigate } from "react-router-dom";
 
