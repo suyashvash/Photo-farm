@@ -23,13 +23,14 @@ export default function LoginScreen() {
                 username: `${username}`,
                 password: `${password}`
             }
-            await axios.post('https://photofarm.herokuapp.com/api/users/login', data)
+            await axios.post('https://photo-farm-backend.onrender.com/api/users/login', data)
                 .then(res => {
                     if (res.data.loggedIn) {
                         dispatch(setActiveUser({ token: res.data.token, loggedIn: true, }))
                         navigate(`/profile`)
                     } else {
                         alert(res.data.message)
+                        console.log(res.data)
 
                     }
                 })
@@ -47,7 +48,7 @@ export default function LoginScreen() {
                 username: `${username}`,
                 password: `${password}`
             }
-            await axios.post('https://photofarm.herokuapp.com/api/users/register', data)
+            await axios.post('https://photo-farm-backend.onrender.com/api/users/register', data)
                 .then(res => { alert(res.data.message) })
                 .catch(err => alert(err))
         } else {

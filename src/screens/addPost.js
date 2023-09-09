@@ -23,7 +23,7 @@ export default function AddPostScreen() {
                 caption: `${caption}`,
                 postUrl: `${url}`
             }
-            axios.post('https://photofarm.herokuapp.com/api/posts/addPost', data)
+            axios.post('https://photo-farm-backend.onrender.com/api/posts/addPost', data)
                 .then(res => {
                     console.log(res)
                     if (res.data.status) {

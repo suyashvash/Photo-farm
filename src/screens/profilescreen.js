@@ -45,7 +45,7 @@ export default function ProfileScreen() {
     }
 
     const getPosts = () => {
-        axios.get(`https://photofarm.herokuapp.com/api/posts/mypost/${token}`)
+        axios.get(`https://photo-farm-backend.onrender.com/api/posts/mypost/${token}`)
             .then(response => { setPostData(response.data.data); setIsLoading(false) })
             .catch(err => { console.log(err); setIsLoading(false) })
     }
@@ -57,7 +57,7 @@ export default function ProfileScreen() {
             url: selectedUrl,
             caption: selectedCaption,
         }
-        await axios.post(`https://photofarm.herokuapp.com/api/posts/updatepost/${selectedId}`, data)
+        await axios.post(`https://photo-farm-backend.onrender.com/api/posts/updatepost/${selectedId}`, data)
             .then(response => {
                 if (response.data.status) {
                     setIsLoading(false);
@@ -82,7 +82,7 @@ export default function ProfileScreen() {
         if (ask) {
             setIsLoading(true)
             setIsEding(false)
-            await axios.delete(`https://photofarm.herokuapp.com/api/posts/deletepost/${id}`)
+            await axios.delete(`https://photo-farm-backend.onrender.com/api/posts/deletepost/${id}`)
                 .then(response => {
                     if (response.data.status) {
                         setIsLoading(false);

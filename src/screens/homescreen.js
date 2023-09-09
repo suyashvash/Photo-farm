@@ -20,9 +20,14 @@ export default function HomeScreen() {
     }
 
     const getPosts = () => {
-        axios.get('https://photofarm.herokuapp.com/api/posts/showall')
-            .then(response => { setPostData(response.data); setIsLoading(false) })
-            .catch(err => { console.log(err); setIsLoading(false) })
+        axios.get('https://photo-farm-backend.onrender.com/api/posts/showall')
+            .then(response => { 
+                setPostData(response.data); 
+                console.log(response.data);
+                setIsLoading(false) })
+            .catch(err => { 
+                console.log(err); 
+                setIsLoading(false) })
     }
 
 
